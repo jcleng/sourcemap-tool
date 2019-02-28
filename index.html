@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sourcemap</title>
+    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAA7KGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgICAgICAgICAgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIgogICAgICAgICAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgICAgICAgICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBQaG90b3Nob3AgQ0MgMjAxNyAoTWFjaW50b3NoKTwveG1wOkNyZWF0b3JUb29sPgogICAgICAgICA8eG1wOkNyZWF0ZURhdGU+MjAxOS0wMi0yNlQxNjowMToyNCswODowMDwveG1wOkNyZWF0ZURhdGU+CiAgICAgICAgIDx4bXA6TW9kaWZ5RGF0ZT4yMDE5LTAyLTI2VDE2OjExOjUxKzA4OjAwPC94bXA6TW9kaWZ5RGF0ZT4KICAgICAgICAgPHhtcDpNZXRhZGF0YURhdGU+MjAxOS0wMi0yNlQxNjoxMTo1MSswODowMDwveG1wOk1ldGFkYXRhRGF0ZT4KICAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9wbmc8L2RjOmZvcm1hdD4KICAgICAgICAgPHBob3Rvc2hvcDpDb2xvck1vZGU+MzwvcGhvdG9zaG9wOkNvbG9yTW9kZT4KICAgICAgICAgPHBob3Rvc2hvcDpUZXh0TGF5ZXJzPgogICAgICAgICAgICA8cmRmOkJhZz4KICAgICAgICAgICAgICAgPHJkZjpsaSByZGY6cGFyc2VUeXBlPSJSZXNvdXJjZSI+CiAgICAgICAgICAgICAgICAgIDxwaG90b3Nob3A6TGF5ZXJOYW1lPnM8L3Bob3Rvc2hvcDpMYXllck5hbWU+CiAgICAgICAgICAgICAgICAgIDxwaG90b3Nob3A6TGF5ZXJUZXh0PnM8L3Bob3Rvc2hvcDpMYXllclRleHQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICA8L3JkZjpCYWc+CiAgICAgICAgIDwvcGhvdG9zaG9wOlRleHRMYXllcnM+CiAgICAgICAgIDx4bXBNTTpJbnN0YW5jZUlEPnhtcC5paWQ6ZDNjMDk2NjEtZTE1Zi00NzgxLWE4M2UtYTliZDg0NDYwZWJlPC94bXBNTTpJbnN0YW5jZUlEPgogICAgICAgICA8eG1wTU06RG9jdW1lbnRJRD5hZG9iZTpkb2NpZDpwaG90b3Nob3A6OTBkNmNjODktN2EyYy0xMTdjLTlmNWMtYmZkNTA0ZTc3MGQ1PC94bXBNTTpEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06T3JpZ2luYWxEb2N1bWVudElEPnhtcC5kaWQ6Y2NjY2Y1NTEtNTEwNi00N2I5LTljYTYtNWNlNjBkMGY2NmJlPC94bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ+CiAgICAgICAgIDx4bXBNTTpIaXN0b3J5PgogICAgICAgICAgICA8cmRmOlNlcT4KICAgICAgICAgICAgICAgPHJkZjpsaSByZGY6cGFyc2VUeXBlPSJSZXNvdXJjZSI+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDphY3Rpb24+Y3JlYXRlZDwvc3RFdnQ6YWN0aW9uPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6aW5zdGFuY2VJRD54bXAuaWlkOmNjY2NmNTUxLTUxMDYtNDdiOS05Y2E2LTVjZTYwZDBmNjZiZTwvc3RFdnQ6aW5zdGFuY2VJRD4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OndoZW4+MjAxOS0wMi0yNlQxNjowMToyNCswODowMDwvc3RFdnQ6d2hlbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnNvZnR3YXJlQWdlbnQ+QWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCk8L3N0RXZ0OnNvZnR3YXJlQWdlbnQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5zYXZlZDwvc3RFdnQ6YWN0aW9uPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6aW5zdGFuY2VJRD54bXAuaWlkOmQzYzA5NjYxLWUxNWYtNDc4MS1hODNlLWE5YmQ4NDQ2MGViZTwvc3RFdnQ6aW5zdGFuY2VJRD4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OndoZW4+MjAxOS0wMi0yNlQxNjoxMTo1MSswODowMDwvc3RFdnQ6d2hlbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnNvZnR3YXJlQWdlbnQ+QWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCk8L3N0RXZ0OnNvZnR3YXJlQWdlbnQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpjaGFuZ2VkPi88L3N0RXZ0OmNoYW5nZWQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICA8L3JkZjpTZXE+CiAgICAgICAgIDwveG1wTU06SGlzdG9yeT4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6WFJlc29sdXRpb24+NzIwMDAwLzEwMDAwPC90aWZmOlhSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj43MjAwMDAvMTAwMDA8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+NjU1MzU8L2V4aWY6Q29sb3JTcGFjZT4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjYwPC9leGlmOlBpeGVsWERpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6UGl4ZWxZRGltZW5zaW9uPjYwPC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgCjw/eHBhY2tldCBlbmQ9InciPz6gjEenAAADAFBMVEVHcEx+2tT511BIt+FXeWXm49xxmoTqxbmcgpJ2c4ab2dSFm6z31ENMP1f821lButvhOZQ2NFTf1YXX2J0hJVjRJYiP1uDbPJaDaXBWXmfhebX64G1FttlpcyiNcoWb9umj5OB8vUqy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">
+    <script src="https://unpkg.com/source-map@0.7.3/dist/source-map.js"></script>
+    <script>
+        sourceMap.SourceMapConsumer.initialize({
+            "lib/mappings.wasm": "https://unpkg.com/source-map@0.7.3/lib/mappings.wasm"
+        });
+    </script>
+    <style>
+        .mapping__textarea{
+            transition: 0.3s all;
+            max-height: 100px;
+        }
+        .mapping__textarea.hidden{
+            max-height: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div>sourcemap 工具</div>
+    <br>
+    <div>
+        <select name="" id="content_type">
+            <option value="stack">错误栈信息</option>
+            <option value="jsOrMap">报错js或sourmap文件路径</option>
+        </select>
+        <span id="line_column_info">
+            <input placeholder="第几行" id="line_number" type="number">
+            <input placeholder="第几列" id="column_number" type="number">
+        </span>
+    </div>
+    <div>
+        <textarea type="text" style="width: 100%" rows="6" id="content_value"></textarea>
+    </div>
+    <div>
+        <button id="btn_parse">解析</button>
+        <span id="tip_info" style="font-size: 10px;"></span>
+    </div>
+    <div>
+        <textarea type="text" style="width: 100%" rows="6" id="origin_value"></textarea>
+    </div>
+    <div>
+
+        <button title="如果 sourcemap 路径是相对路径，会到映射后的路径相对路径查找.map文件" id="mapping_extend_btn">
+            路径映射
+        </button>
+        <div>
+            <textarea
+            style="width: 100%"
+            id="mapping_table"
+            class="mapping__textarea hidden"
+            name="" cols="30" rows="6"
+            placeholder="例如：
+a.com b.com
+example1.net examplew.net
+
+说明：如果 sourcemap 路径是相对路径，会到映射后路径的相对路径查找.map文件，使用空格分隔，多条映射使用换行分隔"></textarea>
+        </div>
+    </div>
+    <div>
+        <h4>使用说明：</h4>
+        <ol>
+            <li>该工具通过sourcemap定位压缩代码异常信息对应的源代码</li>
+            <li>需在chrome浏览器上运行，且chrome版本 >= 57</li>
+        </ol>
+    </div>
+    <script>
+        (function () {
+            const textareaStackPlaceholder = `请输入错误栈信息，例如:
+    TypeError: Cannot read property 'name' of undefined
+        at Object.333 (https://www.example.com/script/xxx.7ace3973.js:1:2952)`;
+            const textareaPathPlaceholder = `请输入路径，例如：
+    https://www.example.com/scripts/vendor.xxx.js
+    或
+    https://www.example.com/scripts/vendor.xxx.js.map`;
+            const regStack = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,}):([0-9]+):([0-9]+)/gm;
+            const regMappingURL = /sourceMappingURL=(.*\.map).*$/;
+
+            let parseStatus = null;
+            let init = function () {
+                if (sessionStorage.getItem('tools_source_map_content')) {
+                    document.getElementById('content_value').value = sessionStorage.getItem('tools_source_map_content');
+                }
+                if (sessionStorage.getItem('tools_source_map_type')) {
+                    document.getElementById('content_type').value = sessionStorage.getItem('tools_source_map_type');
+                }
+                if (sessionStorage.getItem('tools_source_map_line')) {
+                    document.getElementById('line_number').value = sessionStorage.getItem('tools_source_map_line');
+                }
+                if (sessionStorage.getItem('tools_source_map_column')) {
+                    document.getElementById('column_number').value = sessionStorage.getItem('tools_source_map_column');
+                }
+                if (sessionStorage.getItem('tools_source_map_mapping_table')) {
+                    document.getElementById('mapping_table').value = sessionStorage.getItem('tools_source_map_mapping_table');
+                }
+                document.getElementById('mapping_extend_btn').onclick = function () {
+                    console.log(document.getElementById('mapping_table').className === 'mapping__textarea hidden')
+                    if (document.getElementById('mapping_table').className === 'mapping__textarea hidden') {
+                        document.getElementById('mapping_table').className = 'mapping__textarea';
+                        // document.getElementById('mapping_extend').innerText = '↑';
+                    } else {
+                        document.getElementById('mapping_table').className = 'mapping__textarea hidden';
+                    }
+                }
+            };
+            let initStyle = function () {
+                if (document.getElementById('content_type').value === 'stack') {
+                    document.getElementById('line_column_info').style.display = "none";
+                    document.getElementById('content_value').setAttribute('placeholder', textareaStackPlaceholder)
+                } else {
+                    document.getElementById('content_value').setAttribute('placeholder', textareaPathPlaceholder)
+                    document.getElementById('line_column_info').style.display = "inline-block";
+                }
+            };
+            init();
+            let setParseStatus = function (status) {
+                parseStatus = status;
+                switch (status) {
+                    case 0: 
+                        document.getElementById('tip_info').innerText = '解析中...';
+                        break;
+                    case 1: 
+                        document.getElementById('tip_info').innerText = `解析完成`;
+                        break;
+                    case 2: 
+                        document.getElementById('tip_info').innerText = `解析失败`;
+                        break;
+                    case 3: 
+                        document.getElementById('tip_info').innerText = `解析超时`;
+                        break;
+                    default:
+                        document.getElementById('tip_info').innerText = `解析失败${status ? ',' + status : ''}`;
+                        break;
+                }
+            };
+            let jsURL2MappingURL = function (jsURL, mappingObject) {
+                return new Promise((resolve, reject) => {
+                    fetch (jsURL)
+                        .then(res => {
+                            try {
+                                return res.text();
+                            } catch (e) {
+                                reject(`${jsURL}内容有误`)
+                            }
+                        }, rej => {
+                            reject(`${rej} ${jsURL}`);
+                        })
+                        .then(content => {
+                            if (content) {
+                                let result = content.match(regMappingURL);
+                                if (!result) {
+                                    reject(`${jsURL}内容存在错误或对应的sourcemap不存在`);
+                                    return;
+                                }
+
+                                let baseURL = jsURL;
+                                for (let key in mappingObject) {
+                                    if (mappingObject[key] && baseURL.indexOf(key) !== -1) {
+                                        baseURL = baseURL.replace(key, mappingObject[key]);
+                                    }
+                                }
+                                resolve(new URL(result[1], baseURL).href);
+                            }
+                        })
+                })
+            };
+            let consumerMapFile = function (mappingUrl, positionList) {
+                if (Object.prototype.toString.call(positionList) === '[object Object]') {
+                    positionList = [positionList];
+                }
+                return new Promise((resolve, reject) => {
+                    if (mappingUrl) {
+                        fetch(mappingUrl)
+                            .then(res => {
+                                try {
+                                    return res.text();
+                                } catch (e) {
+                                    reject(`${mappingUrl}内容有误`);
+                                }
+                            }, rej => {
+                                reject(`${rej} ${mappingUrl}`);
+                            })
+                            .then(content => {
+                                if (content) {
+                                    try {
+                                        new sourceMap.SourceMapConsumer(content)
+                                            .then(consumer => {
+                                                resolve(
+                                                    positionList.map(position => consumer.originalPositionFor(position))
+                                                );
+                                            }, rej => {
+                                                reject(`${mappingUrl}解析失败`);
+                                            })
+                                    } catch (e) {
+                                        reject(`${mappingUrl}内容存在错误或解析失败`);
+                                    }
+                                }
+                            })
+                    }
+                })
+            };
+
+            let mappingText2mappingObject = function (text) {
+                let result = {};
+                text.split(/\n|\r/).forEach(group => {
+                    let groupArr = group.split(/\s+/);
+                    if (groupArr[0] && groupArr[1]) {
+                        result[groupArr[0]] = groupArr[1];
+                    }
+                });
+                return result;
+            }
+
+    
+            initStyle();
+            document.getElementById('content_type').onchange = function () {
+                initStyle();
+                document.getElementById('line_number').value = null;
+                document.getElementById('column_number').value = null;
+            }
+            document.getElementById('btn_parse').onclick = async function () {
+                setTimeout(function () {
+                    if (parseStatus === 0) {
+                        setParseStatus(3);
+                    }
+                }, 10000);
+                setParseStatus(0);
+
+                let contentType = document.getElementById('content_type').value;
+                let contentValue = document.getElementById('content_value').value;
+                let mappingTableText = document.getElementById('mapping_table').value;
+                let originPosionInfo = [];
+                let mappingTableObject = mappingText2mappingObject(mappingTableText);
+
+                sessionStorage.setItem('tools_source_map_type', contentType);
+                sessionStorage.setItem('tools_source_map_content', contentValue);
+                sessionStorage.setItem('tools_source_map_mapping_table', mappingTableText);
+    
+                if (contentType === 'stack') {
+                    let stackList = contentValue.match(regStack);
+                    let mappingInfo = {};
+                    if (stackList && stackList.length) {
+                        stackList.forEach(stackInfo => {
+                            regStack.lastIndex = 0; //
+                            stackLine = regStack.exec(stackInfo);
+                            let fileURL = stackLine[1];
+                            let positionInfo = {
+                                line: stackLine[2],
+                                column: stackLine[3]
+                            }
+                            if (!mappingInfo[fileURL]) {
+                                mappingInfo[fileURL] = [];
+                            }
+                            mappingInfo[fileURL].push({
+                                line: Number(stackLine[2]),
+                                column: Number(stackLine[3])
+                            });
+                        })
+        
+                        for (let fileURL in mappingInfo) {
+                            await jsURL2MappingURL(fileURL, mappingTableObject).then(async mappingURL => {
+                                await consumerMapFile(mappingURL, mappingInfo[fileURL]).then(res => {
+                                    res.forEach(v => {
+                                        originPosionInfo.push(JSON.stringify(v));
+                                    })
+                                }, err => {
+                                    console.lig
+                                    originPosionInfo.push(err);
+                                })
+                            }, error => {
+                                originPosionInfo.push(error);
+                            })
+                        }
+                        setParseStatus(1);
+                        document.getElementById('origin_value').value = originPosionInfo.join('\n');
+                    } else {
+                        setParseStatus(2);
+                        document.getElementById('origin_value').value = '输入有误，请检查';
+                    }
+                } else {
+                    let lineNum = Number(document.getElementById('line_number').value);
+                    let columnNum = Number(document.getElementById('column_number').value);
+
+                    if (lineNum) {
+                        sessionStorage.setItem('tools_source_map_line', lineNum);
+                    }
+                    if (columnNum) {
+                        sessionStorage.setItem('tools_source_map_column', columnNum);
+                    }
+
+                    if ((!lineNum && lineNum !== 0) || (!columnNum && columnNum !== 0)) {
+                        document.getElementById('origin_value').value = '请输入行、列 信息';
+                        setParseStatus(2);
+                    } else {
+                        if (/.+\.js\s*$/.test(contentValue)) {
+                            let fileURL = contentValue;
+                            await jsURL2MappingURL(fileURL, mappingTableObject).then(async mappingURL => {
+                                await consumerMapFile(mappingURL, {
+                                    line: lineNum,
+                                    column: columnNum
+                                }).then(res => {
+                                    res.forEach(v => {
+                                        originPosionInfo.push(JSON.stringify(v));
+                                    })
+                                }, err => {
+                                    originPosionInfo.push(err);
+                                })
+                            }, error => {
+                                originPosionInfo.push(error);
+                            })
+                            document.getElementById('origin_value').value = originPosionInfo.join('\n');
+                            setParseStatus(1);
+                        } else if (/.+\.map\s*$/.test(contentValue)) {
+                            let mappingURL = contentValue;
+                            await consumerMapFile(mappingURL, {
+                                line: lineNum,
+                                column: columnNum
+                            }).then(res => {
+                                res.forEach(v => {
+                                    originPosionInfo.push(JSON.stringify(v));
+                                })
+                            }, err => {
+                                originPosionInfo.push(err);
+                            })
+                            document.getElementById('origin_value').value = originPosionInfo.join('\n');
+                            setParseStatus(1);
+                        } else {
+                            document.getElementById('origin_value').value = '路径输入有误';
+                            setParseStatus(2);
+                        }
+                    }
+                }
+            }
+        })()
+    </script>
+</body>
+</html>
