@@ -30,6 +30,7 @@
         <select name="" id="content_type">
             <option value="stack">错误栈信息</option>
             <option value="jsOrMap">报错js或sourmap文件路径</option>
+            <option value="uploadMapFile">上传.map文件</option>
         </select>
         <span id="line_column_info">
             <input placeholder="第几行" id="line_number" type="number">
@@ -38,6 +39,7 @@
     </div>
     <div>
         <textarea type="text" style="width: 100%" rows="6" id="content_value"></textarea>
+        <input type="file" onchange="changeFile()" id="content_upload_file">
     </div>
     <div>
         <button id="btn_parse">解析</button>
@@ -59,9 +61,10 @@
             name="" cols="30" rows="6"
             placeholder="例如：
 a.com b.com
-example1.net examplew.net
+example1.com example2.com
 
-说明：如果 sourcemap 路径是相对路径，会到映射后路径的相对路径查找.map文件，使用空格分隔，多条映射使用换行分隔"></textarea>
+说明：如果 sourcemap 路径是相对路径，会到映射后路径的相对路径查找.map文件，使用空格分隔，多条映射使用换行分隔">
+</textarea>
         </div>
     </div>
     <div>
@@ -72,7 +75,17 @@ example1.net examplew.net
         </ol>
     </div>
     <script>
-        (function () {
+        (function (win) {
+            let mapContent = '';
+
+            win.changeFile = function () {
+                let reader = new FileReader();
+                reader.readAsText(document.getElementById('content_upload_file').files[0]);
+                reader.onload = function (e) {
+                    mapContent = e.target.result;
+                };
+            }
+
             const textareaStackPlaceholder = `请输入错误栈信息，例如:
     TypeError: Cannot read property 'name' of undefined
         at Object.333 (https://www.example.com/script/xxx.7ace3973.js:1:2952)`;
@@ -101,7 +114,7 @@ example1.net examplew.net
                     document.getElementById('mapping_table').value = sessionStorage.getItem('tools_source_map_mapping_table');
                 }
                 document.getElementById('mapping_extend_btn').onclick = function () {
-                    console.log(document.getElementById('mapping_table').className === 'mapping__textarea hidden')
+                    document.getElementById('mapping_table').className === 'mapping__textarea hidden';
                     if (document.getElementById('mapping_table').className === 'mapping__textarea hidden') {
                         document.getElementById('mapping_table').className = 'mapping__textarea';
                         // document.getElementById('mapping_extend').innerText = '↑';
@@ -113,10 +126,18 @@ example1.net examplew.net
             let initStyle = function () {
                 if (document.getElementById('content_type').value === 'stack') {
                     document.getElementById('line_column_info').style.display = "none";
-                    document.getElementById('content_value').setAttribute('placeholder', textareaStackPlaceholder)
-                } else {
+                    document.getElementById('content_value').setAttribute('placeholder', textareaStackPlaceholder);
+                    document.getElementById('content_upload_file').style.display = "none";
+                    document.getElementById('content_value').style.display = "unset";                    
+                } else if (document.getElementById('content_type').value === 'jsOrMap') {
                     document.getElementById('content_value').setAttribute('placeholder', textareaPathPlaceholder)
                     document.getElementById('line_column_info').style.display = "inline-block";
+                    document.getElementById('content_value').style.display = "unset";                    
+                    document.getElementById('content_upload_file').style.display = "none";                    
+                } else {
+                    document.getElementById('content_value').style.display = "none";
+                    document.getElementById('line_column_info').style.display = "inline-block";
+                    document.getElementById('content_upload_file').style.display = "unset";                   
                 }
             };
             init();
@@ -284,7 +305,7 @@ example1.net examplew.net
                         setParseStatus(2);
                         document.getElementById('origin_value').value = '输入有误，请检查';
                     }
-                } else {
+                } else if (contentType === 'jsOrMap') {
                     let lineNum = Number(document.getElementById('line_number').value);
                     let columnNum = Number(document.getElementById('column_number').value);
 
@@ -295,7 +316,7 @@ example1.net examplew.net
                         sessionStorage.setItem('tools_source_map_column', columnNum);
                     }
 
-                    if ((!lineNum && lineNum !== 0) || (!columnNum && columnNum !== 0)) {
+                    if (!lineNum || !columnNum) {
                         document.getElementById('origin_value').value = '请输入行、列 信息';
                         setParseStatus(2);
                     } else {
@@ -336,9 +357,45 @@ example1.net examplew.net
                             setParseStatus(2);
                         }
                     }
+                } else {
+                    let lineNum = Number(document.getElementById('line_number').value);
+                    let columnNum = Number(document.getElementById('column_number').value);
+
+                    if (lineNum) {
+                        sessionStorage.setItem('tools_source_map_line', lineNum);
+                    }
+                    if (columnNum) {
+                        sessionStorage.setItem('tools_source_map_column', columnNum);
+                    }
+
+                    if (!lineNum || !columnNum) {
+                        document.getElementById('origin_value').value = '请输入行、列 信息';
+                        setParseStatus(2);
+                    } else if (!mapContent) {
+                        document.getElementById('origin_value').value = '请上传map文件';
+                        setParseStatus(2);
+                    } else {
+                        try {
+                            new sourceMap.SourceMapConsumer(mapContent)
+                                .then(consumer => {
+                                    document.getElementById('origin_value').value = JSON.stringify(consumer.originalPositionFor({
+                                        line: lineNum,
+                                        column: columnNum
+                                    }));
+                                    setParseStatus(1);                                
+                                })
+                                .catch(err => {
+                                    document.getElementById('origin_value').value = `解析失败`;
+                                    setParseStatus(2);                                
+                                })
+                        } catch (e) {
+                            document.getElementById('origin_value').value = `map文件内容存在错误或解析失败`;
+                            setParseStatus(2);
+                        }
+                    }
                 }
             }
-        })()
+        })(window)
     </script>
 </body>
 </html>
